@@ -1,6 +1,5 @@
-
-import React from 'react';
-import * as LucideIcons from 'lucide-react';
+import React from "react";
+import * as LucideIcons from "lucide-react";
 
 interface IconProps {
   name: string;
@@ -9,14 +8,21 @@ interface IconProps {
   fallback?: string;
 }
 
-const Icon: React.FC<IconProps> = ({ name, size = 24, className = '', fallback = 'CircleAlert' }) => {
-  const IconComponent = (LucideIcons as any)[name] || (LucideIcons as any)[fallback];
-  
+const Icon: React.FC<IconProps> = ({
+  name,
+  size = 24,
+  className = "",
+  fallback = "CircleAlert",
+}) => {
+  const IconComponent =
+    (LucideIcons as any)[name] || (LucideIcons as any)[fallback];
+
   if (!IconComponent) {
     console.warn(`Icon "${name}" not found, using fallback "${fallback}"`);
-    return <(LucideIcons as any).CircleAlert size={size} className={className} />;
+    const FallbackIcon = (LucideIcons as any).CircleAlert;
+    return <FallbackIcon size={size} className={className} />;
   }
-  
+
   return <IconComponent size={size} className={className} />;
 };
 
